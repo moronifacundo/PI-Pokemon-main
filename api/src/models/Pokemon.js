@@ -1,14 +1,18 @@
 const { DataTypes } = require('sequelize');
+// const { get } = require('../routes');
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('pokemon', {
     id: {
-      type: DataTypes.INTEGER,  // Voy a usar un id de solo un numero, pero le voy a sumar 3000 para no pisar api
+      type: DataTypes.INTEGER,  // Voy a usar un id de solo un numero, pero le voy a sumar 3000 para no pisar api (hay 898 id usados.)
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true,
+      // autoIncrement: true,
+      // get() {
+      //   return 'db' + this.getDataValue('ide');
+      // }
       set(value) {
         this.setDataValue('id', value + 3000);
       }
@@ -16,6 +20,9 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      set(value) {
+        this.setDataValue('name', value.toLowerCase());
+      }
     },
     hp: {
       type: DataTypes.INTEGER,
