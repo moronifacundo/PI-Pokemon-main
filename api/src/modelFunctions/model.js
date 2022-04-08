@@ -1,27 +1,41 @@
 const axios = require('axios');
 // const bodyParser = require('body-parser');
-const { Pokemon, Type, Pokemon_Type } = require("../db");
+const { Pokemon, Type } = require("../db");
 var pokeID = 1;
 
 module.exports = { // Instructor hace todo por front, SE TRAE todo desde el back, con esto
 
     getSummaryApiPokemon: async function () {
-        var nameUrls = (await axios.get('https://pokeapi.co/api/v2/pokemon?limit=40')).data.results
+        var nameUrls = (await axios.get('https://pokeapi.co/api/v2/pokemon?limit=4')).data.results
         var pokeDetails = await Promise.all(
             nameUrls.map(async e => {  // await no servia con maps, tuve q usar promiseall
-                var pokemonInfo = await axios.get(e.url);
-                return {
-                    id: pokemonInfo.data.id,
-                    name: pokemonInfo.data.name,
-                    img: pokemonInfo.data.sprites.other["official-artwork"].front_default,
-                    types: pokemonInfo.data.types.map(iType => {
-                        var id = this.getTypeIdFromURL(iType.type.url) // para obtener el id de types
-                        return {
-                            name: iType.type.name,
-                            id: id
-                        }
-                    })
-                }
+                try {
+
+                    var pokemonInfo = await axios.get(e.url);
+                    console.log("la url de ", e.name, "es ", e.url)
+                    var ob = { ///// PRUEBA
+                        // return {   //final
+                        id: pokemonInfo.data.id,
+                        name: pokemonInfo.data.name,
+                        img: pokemonInfo.data.sprites.other["official-artwork"].front_default,
+                        types: pokemonInfo.data.types.map(iType => {
+                            // var id = this.getTypeIdFromURL(iType.type.url) // para obtener el id de types
+                            return {
+                                name: iType.type.name,
+                                // id: id
+                            }
+                        })
+                    }
+                    console.log(ob); return (ob)   ///// PRUEBA
+                } catch (error) {
+                    return { ///// PRUEBA
+                        // return {   //final
+                        id: Math.random,
+                        name: "no lo agarra",
+                        img: "",
+                        types: ["fire"]
+                    }
+                 }
             }))
         return pokeDetails
     },
@@ -37,6 +51,7 @@ module.exports = { // Instructor hace todo por front, SE TRAE todo desde el back
     */
 
     getDbPokemon: async function () { // Para traerme los de la base de datos
+        console.log("entro a buscar a la db")
         return await Pokemon.findAll({
             include: {
                 model: Type,
@@ -50,6 +65,7 @@ module.exports = { // Instructor hace todo por front, SE TRAE todo desde el back
 
     getAllPokemon: async function () {
         const apiPokemon = await this.getSummaryApiPokemon();
+        console.log("trajo de la api")
         const dbPokemon = await this.getDbPokemon();
         const totalPokemon = apiPokemon.concat(dbPokemon)
         return totalPokemon

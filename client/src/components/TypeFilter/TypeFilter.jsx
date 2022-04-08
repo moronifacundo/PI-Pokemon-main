@@ -1,14 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux'
-import { searchByName } from '../../redux/actions';
+import { filterByType } from '../../redux/actions';
 import { fillPokemonStore } from '../../redux/actions';
 
-const NameFilter = () => {
+const TypeFilter = () => {
 
     const dispatch = useDispatch()
 
     const [input, setInput] = React.useState({
-        name: '',
+        type: '',
     });
 
     const handleInputChange = function (e) {
@@ -20,10 +20,10 @@ const NameFilter = () => {
 
     const handleSubmit = function (e) {
         e.preventDefault();
-        if (!input.name) {
+        if (!input.type) {
             dispatch(fillPokemonStore())
         } else {
-            dispatch(searchByName({ ...input }))
+            dispatch(filterByType(input))  // {input: ----}
         }
     }
 
@@ -31,11 +31,11 @@ const NameFilter = () => {
         <div>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Search by Name: </label>
+                    <label>Search by Type: </label>
                     <input
                         type="text"
-                        name="name"
-                        value={input["name"]}
+                        name="type"
+                        value={input["type"]}
                         onChange={handleInputChange} />
                 </div>
 
@@ -45,4 +45,4 @@ const NameFilter = () => {
     );
 };
 
-export default NameFilter;
+export default TypeFilter;

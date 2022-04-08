@@ -5,6 +5,8 @@ import { CREATE_POKEMON } from '../actions/index';
 import { DELETE_POKEMON } from '../actions/index';
 import { GET_TYPES } from '../actions/index';
 import { FILTER_BY_NAME } from '../actions/index';
+import { FILTER_BY_TYPE } from '../actions/index';
+import { FILL_POKEMON_STORE } from '../actions/index';
 
 const initialState = {
     pokemons: [],
@@ -50,7 +52,19 @@ const rootReducer = (state = initialState, action) => {
         case FILTER_BY_NAME:
             return {
                 ...state,
-                pokemons: state.allPokemons.filter(p => p.name == action.payload)
+                pokemons: state.allPokemons.filter(p => p.name === action.payload)
+            }
+
+        case FILTER_BY_TYPE:
+            return {
+                ...state,
+                pokemons: state.allPokemons.filter(p => (p.types[0].name === action.payload || p.types[1]?.name === action.payload))
+            }
+
+        case FILL_POKEMON_STORE:
+            return {
+                ...state,
+                pokemons: state.allPokemons
             }
 
         default:

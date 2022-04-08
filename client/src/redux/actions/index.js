@@ -6,7 +6,8 @@ export const GET_POKEMON = 'GET_POKEMON';
 export const DELETE_POKEMON = 'DELETE_POKEMON';
 export const GET_TYPES = 'GET_TYPES';
 export const FILTER_BY_NAME = 'FILTER_BY_NAME';
-
+export const FILTER_BY_TYPE = 'FILTER_BY_TYPE';
+export const FILL_POKEMON_STORE = 'FILL_POKEMON_STORE';
 
 //////////////////////
 
@@ -47,6 +48,15 @@ export const deletePokemon = (payload) => {
     return { type: DELETE_POKEMON, payload };
 };
 
-export const filterByName = (payload) => {
-    return { type: FILTER_BY_NAME, payload: payload.name };
+export const searchByName = (payload) => {
+    return { type: FILTER_BY_NAME, payload: payload.name.toLowerCase() };
+};
+
+export const fillPokemonStore = () => {
+    return { type: FILL_POKEMON_STORE };
+};
+
+export const filterByType = (payload) => {
+    console.log("filtra by type, ", payload.type)
+    return { type: FILTER_BY_TYPE, payload: payload.type };
 };
