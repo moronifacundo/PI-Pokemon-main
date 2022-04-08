@@ -18,23 +18,31 @@ var router = Router();
 //   /// GET
 
 router.get("/pokemons/:idPokemon", async (req, res) => {
-    var {idPokemon} = req.params
+    var { idPokemon } = req.params
     var result = (await model.getPokemon(idPokemon))
+    if (typeof result === "string") { res.status(404) }
     res.json(result)
 })
 
 router.get("/pokemons", async (req, res) => {
-    var {name} = req.query
-    if (name) { res.json(await model.getPokemon(name)) }
+    var { name } = req.query
+    if (name) { var result = await model.getPokemon(name) }
     else {
-        res.json(await model.getAllPokemon())
+        return res.json(await model.getAllPokemon())
     }
+    if (typeof result === "string") { res.status(404) }
+    res.json(result)
 })
 //   /// POST
-
 router.post("/pokemons", async (req, res) => {
-    var { name, hp, strength, defence, speed, height, weight, types } = req.body;
-    res.json(await model.createPokemon(name, hp, strength, defence, speed, height, weight, types))
+    var { name, hp, strength, defence, speed, height, weight, img, types } = req.body;
+    hp = Number(hp);
+    strength = Number(strength);
+    defence = Number(defence);
+    speed = Number(speed);
+    height = Number(height);
+    weight = Number(weight);
+    res.json(await model.createPokemon(name, hp, strength, defence, speed, height, weight, img, types))
 })
 
 // TYPE

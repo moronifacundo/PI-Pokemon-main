@@ -6,7 +6,7 @@ var pokeID = 1;
 module.exports = { // Instructor hace todo por front, SE TRAE todo desde el back, con esto
 
     getSummaryApiPokemon: async function () {
-        var nameUrls = (await axios.get('https://pokeapi.co/api/v2/pokemon')).data.results
+        var nameUrls = (await axios.get('https://pokeapi.co/api/v2/pokemon?limit=40')).data.results
         var pokeDetails = await Promise.all(
             nameUrls.map(async e => {  // await no servia con maps, tuve q usar promiseall
                 var pokemonInfo = await axios.get(e.url);
@@ -40,7 +40,7 @@ module.exports = { // Instructor hace todo por front, SE TRAE todo desde el back
         return await Pokemon.findAll({
             include: {
                 model: Type,
-                attributes: ['name'],
+                attributes: ['name', 'id'],
                 through: {
                     attributes: [],
                 },
@@ -63,31 +63,6 @@ module.exports = { // Instructor hace todo por front, SE TRAE todo desde el back
                 id: this.getTypeIdFromURL(t.url)
             });
         })
-    },
-
-    createPokemon: async function (name, hp, strength, defence, speed, height, weight, types = ["normal"], id = pokeID) {
-        pokeID++
-        try {
-            const newPokemon = await Pokemon.create({
-                name,
-                hp,
-                strength,
-                defence,
-                speed,
-                height,
-                weight,
-                id
-            });
-            types.map(async type => {
-                const newType = await Type.findOne({
-                    where: { name: type }
-                })
-                await newPokemon.addType(newType)
-            })
-        } catch (error) {
-            return (error);
-        }
-        return ("Has creado a " + name)
     },
 
     getPokemon: async function (query) {
@@ -137,7 +112,15 @@ module.exports = { // Instructor hace todo por front, SE TRAE todo desde el back
     },
 
     getTypes: async function () {
-        return await Type.findAll()
+        var types = await Type.findAll();
+        return types
+    },
+
+    deletePokemon: async function (id) {
+        var removedPokemon = await Pokemon.findOne({
+            where: { id: id },
+        })
+        removedPokemon.destroy()
     },
     /// AUXILIARES
 
@@ -147,6 +130,40 @@ module.exports = { // Instructor hace todo por front, SE TRAE todo desde el back
         return id;
         // "https://pokeapi.co/api/v2/type/12/", -> 12
         // "https://pokeapi.co/api/v2/type/4/" -> 4
+    },
+
+    createPokemon: async function (name, hp, strength, defence, speed, height, weight, img, types, id = pokeID) {
+        console.log("agregando a base de datos " + name)
+        if (img === "") { img = "https://i.imgur.com/DfaZPXl.png" }
+        pokeID++
+        try {
+            const [newPokemon, created] = await Pokemon.findOrCreate({
+                where: { name: name },
+                defaults: {
+                    hp,
+                    strength,
+                    defence,
+                    speed,
+                    height,
+                    weight,
+                    img,
+                    id
+                }
+            });
+            if (created) {
+                types?.map(async type => {
+                    console.log("adding type " + type)
+                    const newType = await Type.findOne({
+                        where: { name: type }
+                    })
+                    await newPokemon.addType(newType)
+                })
+                return ("You've created " + name)
+            }
+        } catch (error) {
+            return (error);
+        }
+        return (name + " already exists. Try a different name")
     },
 
     wantedPokeInfo(pokeInfoData) {
