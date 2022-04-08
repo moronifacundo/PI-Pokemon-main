@@ -1,9 +1,25 @@
+import { Route } from 'react-router-dom';
 import './App.css';
+import Types from './components/Types/Types';
+import Pokemons from './components/Pokemons/Pokemons';
+import PokemonDetail from './components/PokemonDetail/PokemonDetail';
+import LandingPage from './components/LandingPage/LandingPage';
+import Nav from './components/Nav/Nav';
+import CreatePokemon from './components/CreatePokemon/CreatePokemon';
+import FiltersBar from './components/FiltersBar/FiltersBar';
+
+
 
 function App() {
   return (
     <div className="App">
-      <h1>Henry Pokemon</h1>
+      <Route exact path="/" component={LandingPage} />
+      <Route path="/:any" component={Nav} />
+      <Route path="/:any" component={FiltersBar} />
+      <Route exact path="/pokemons" component={Pokemons} />
+      <Route exact path="/types" component={Types} />
+      <Route exact path="/pokemon/create" component={CreatePokemon} />
+      <Route exact path="/pokemons/:pokemonId" component={PokemonDetail} />
     </div>
   );
 }

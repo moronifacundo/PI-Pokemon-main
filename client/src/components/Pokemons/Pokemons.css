@@ -1,0 +1,13 @@
+div .pokemons {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    max-width: 900px;
+    max-height: 900px;
+
+}
+
+.nodec {
+    text-decoration: none;
+    color: black;
+}

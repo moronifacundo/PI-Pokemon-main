@@ -1,0 +1,11 @@
+img {
+    /* background-image: url('./pkmn.png'); */
+    max-width: 100%;
+    max-width: 100%;
+}
+
+div .landImg {
+    height: 200px;
+    width: 400px;
+    margin: 0 auto
+}
