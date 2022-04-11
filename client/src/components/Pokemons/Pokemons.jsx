@@ -65,7 +65,10 @@ const Pokemons = (props) => {
                         if (inPage(i)) {
                             // if (true) {
                             return (
-                                <Link className="nodec cardBox" key={p.id} to={`/pokemons/${p.id}`} >
+                                <Link
+                                    className="nodec cardBox"
+                                    key={p.id}
+                                    to={`/pokemons/${p.id}`} >
                                     <PokemonCard
                                         key={p.id}
                                         id={p.id}

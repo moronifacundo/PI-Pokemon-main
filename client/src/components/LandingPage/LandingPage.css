@@ -9,3 +9,36 @@ div .landImg {
     width: 400px;
     margin: 0 auto
 }
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+
+.bgContainer {
+    background-image: url(../../img/bgImg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 27rem;
+    padding-top: 10rem;
+    align-items: center;
+    position: relative;
+}
+
+.btn:hover {
+    cursor: pointer
+}
+
+h1 {
+    font-size: 2.5rem;
+}

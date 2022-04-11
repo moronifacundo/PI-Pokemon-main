@@ -44,7 +44,7 @@ const TypeFilter = () => {
     }, [allPokemons])
 
     return (
-        <div>
+        <div className='marginBot'>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Filter by Type: </label>

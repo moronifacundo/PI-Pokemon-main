@@ -12,7 +12,7 @@ const PokemonCard = (props) => {
     // }
 
     return (
-        <div key={props.name} className='card'>
+        <div key={props.name} className='card buttonCard'>
             <h1 className='name'>{props.name}</h1>
             <img className='img'
                 src={props.img}

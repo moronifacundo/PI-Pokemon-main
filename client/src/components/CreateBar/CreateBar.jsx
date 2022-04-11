@@ -7,6 +7,7 @@ class CreateBar extends Component {
     render() {
         return (
             <div className="createBar">
+                <h4>Quick Creation</h4>
                 <li>
                     <CreatePokemon />
                 </li>

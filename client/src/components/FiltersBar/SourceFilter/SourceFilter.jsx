@@ -41,7 +41,7 @@ const TypeFilter = () => {
     // }
 
     return (
-        <div>
+        <div className='marginBot'>
             <form className="form"
                 // onSubmit={handleSubmit}
                 onChange={handleInputChange}>

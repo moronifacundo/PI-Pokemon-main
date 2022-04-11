@@ -1,3 +1,36 @@
 .detalle {
     background-color: bisque;
+    display: grid;
+    grid-template-columns: repeat(3fr, 1fr);
+    grid-template-rows: repeat(5fr, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.detailsTitle {
+    padding-top: 15px;
+    grid-area: 1 / 1 / 2 / 3;
+    margin: 0 auto;
+}
+
+.detailsIMG {
+    grid-area: 2 / 1 / 3 / 2;
+    margin: 0 auto;
+
+}
+
+.detailsStats {
+    grid-area: 2 / 2 / 3 / 3;
+    margin: 0 auto;
+    padding: auto 0;
+}
+
+.pikachuContainer {
+
+    margin: 0 auto;
+}
+
+.pikachu {
+    margin: 0 auto;
+
 }

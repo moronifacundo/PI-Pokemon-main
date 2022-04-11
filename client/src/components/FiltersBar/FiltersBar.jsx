@@ -12,18 +12,20 @@ class FiltersBar extends Component {
         return (
             <div className="filtersBar">
 
-                <li>
+                <div className='searchByName'>
                     <NameFilter />
-                </li>
-                <li>
+                </div>
+
+                <div className='filters'>
+
                     <TypeFilter />
-                </li>
-                <li>
+
                     <SourceFilter />
-                </li>
-                <li>
+
                     <Sorter />
-                </li>
+
+                </div>
+
             </div>
         );
     };
