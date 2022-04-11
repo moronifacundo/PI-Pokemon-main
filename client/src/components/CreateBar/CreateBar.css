@@ -1,8 +1,8 @@
 .createBar {
-    position: fixed;
+    position: absolute;
     right: 0;
     height: 100%;
     width: 15%;
-    background-color: yellowgreen;
+    background-color: bisque;
     list-style-type: none;
 }

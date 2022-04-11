@@ -25,6 +25,7 @@ const TypeFilter = () => {
         dispatch(intersectFilters())
         return () => {
         }
+        // eslint-disable-next-line
     }, [input, allPokemons])
 
     // React.useEffect(() => {

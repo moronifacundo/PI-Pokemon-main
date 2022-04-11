@@ -40,13 +40,14 @@ const TypeFilter = () => {
         dispatch(intersectFilters())
         return () => {
         }
+        // eslint-disable-next-line
     }, [allPokemons])
 
     return (
         <div>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Search by Type: </label>
+                    <label>Filter by Type: </label>
                     <input
                         type="text"
                         name="type"

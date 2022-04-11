@@ -1,17 +1,17 @@
-import { getAllPokemons } from '../../redux/actions';
+import { getAllPokemons, setLoading } from '../../redux/actions';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import loadingGIF from '../../img/loading.gif'
 
 import { useSelector, useDispatch } from 'react-redux'
 import './Pokemons.css'
-
 import PokemonCard from './PokemonCard/PokemonCard';
 
 const Pokemons = (props) => {
     const dispatch = useDispatch()
     const pokemons = useSelector(state => state.pokemons)
+    const loading = useSelector(state => state.loading)
     const [page, setPage] = React.useState(1)
-    // const [disabled, setDisabled] = React.useState(true)
 
     var pokeOnPage = 12
     var pagesRequired = Math.ceil(pokemons.length / 12)
@@ -29,25 +29,32 @@ const Pokemons = (props) => {
     }
 
     React.useEffect(() => {
-        dispatch(getAllPokemons())
-
+        dispatch(getAllPokemons());
         return () => {
+            dispatch(setLoading(false))
         }
     }, [dispatch])
 
     return (
         <div>
-            <p>Page</p>
-            {
-                pages.map(p => {
-
-                    var disabled = false
-                    if (p === page) { disabled = true }
-                    return (<button
-                        disabled={disabled}
-                        onClick={() => setPage(p)}
-                    >{p}</button>)
-                })
+            {(!loading) ? <div className='pages'>
+                <p>Page</p>
+                {
+                    pages.map((p) => {
+                        var disabled = false
+                        if (p === page) { disabled = true }
+                        return (<button
+                            key={p}
+                            disabled={disabled}
+                            onClick={() => setPage(p)}
+                        >{p}</button>)
+                    })
+                }
+            </div>
+                : <div>
+                    <img src={loadingGIF} alt="Loading resources" />
+                    <p>{loading}</p>
+                </div>
             }
 
             <h1>Pokemons</h1>
@@ -58,7 +65,7 @@ const Pokemons = (props) => {
                         if (inPage(i)) {
                             // if (true) {
                             return (
-                                <Link className="nodec" key={p.id} to={`/pokemons/${p.id}`} >
+                                <Link className="nodec cardBox" key={p.id} to={`/pokemons/${p.id}`} >
                                     <PokemonCard
                                         key={p.id}
                                         id={p.id}
@@ -69,6 +76,7 @@ const Pokemons = (props) => {
                                 </Link>
                             )
                         }
+                        return false//ESTO ES SOLO POR UN WARNING
                     })
                 }
             </div>

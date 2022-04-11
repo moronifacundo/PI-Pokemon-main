@@ -1,5 +1,5 @@
 import React from 'react';
-import { createPokemon } from '../../redux/actions';
+import { createPokemon, setLoading } from '../../redux/actions';
 import { useDispatch } from 'react-redux'
 
 const CreatePokemon = () => {
@@ -65,9 +65,10 @@ const CreatePokemon = () => {
     const handleInputChange = function (e) {
         const { value, name } = e.target;
         // let errors = this.state.errors;
+        // console.log(name)
         var namePattern = /^([a-zA-Z]+)(\s[a-zA-Z]+)*$/;
         var numPattern = /^\d+$/;
-        var urlPattern = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+        var urlPattern = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
 
         switch (name) {
 
@@ -86,13 +87,13 @@ const CreatePokemon = () => {
                 // console.log("entra al switch de error")
                 setErrorAttributes({
                     ...errorAttributes,
-                    [name]: (numPattern.test(value)) ? '' : [name] + ' must be an integer positive number',
+                    [name]: (numPattern.test(value) && value <= 200) ? '' : [name] + ' must be an integer positive number under 200',
                 });
                 break;
 
-            case 'url':
+            case 'img':
                 setErrorUrl(
-                    urlPattern.test(value) ? '' : 'Please enter a valid URL (starting with https://'
+                    urlPattern.test(value) ? '' : 'Please enter a valid URL (starting with https://)'
                 );
                 break;
 
@@ -108,20 +109,25 @@ const CreatePokemon = () => {
 
     React.useEffect(() => {
         validarForm()
+
         return () => {
         }
+        // eslint-disable-next-line
     }, [errorName, errorUrl, errorAttributes])
 
     React.useEffect(() => {
         validarTypes()
         return () => {
         }
+        // eslint-disable-next-line
     }, [input])
 
     const handleSubmit = function (e) {
         e.preventDefault();
-        console.log("handle submit", { ...input, types: [input.type1, input.type2] })
+        // console.log("handle submit", { ...input, types: [input.type1, input.type2] })
+        dispatch(setLoading("Creating Pokemon..."))
         dispatch(createPokemon({ ...input, types: [{ name: input.type1 }, { name: input.type2 }] }))
+        setDisabled(true)
     }
 
     return (
@@ -192,7 +198,7 @@ const CreatePokemon = () => {
                 <div>
                     <label>Weight: </label>
                     <input
-                        type="range"
+                        type="number"
                         name="weight"
                         value={input["weight"]}
                         onChange={handleInputChange} />

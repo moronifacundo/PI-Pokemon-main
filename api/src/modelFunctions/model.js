@@ -183,7 +183,7 @@ module.exports = { // Instructor hace todo por front, SE TRAE todo desde el back
                 })
                 // return ("You've created " + name)
                 newPokemon.types = types
-                console.log("new pokemon ", newPokemon)
+                // console.log("new pokemon ", newPokemon)
                 return (newPokemon)
             }
         } catch (error) {

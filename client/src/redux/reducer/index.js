@@ -8,6 +8,8 @@ import { FILTER_BY_NAME } from '../actions/index';
 import { FILTER_BY_TYPE } from '../actions/index';
 import { FILTER_BY_SOURCE } from '../actions/index';
 import { RESET_FILTER } from '../actions/index';
+import { RESET_DETAILS } from '../actions/index';
+import { SET_LOADING } from '../actions/index';
 import { ORDER_ALL_POKEMONS } from '../actions/index';
 import { INTERSECT } from '../actions/index';
 
@@ -20,6 +22,7 @@ const initialState = {
     types: [],
     allPokemons: [],
     source: "all",
+    loading: "Loading..."
 };
 
 function intersect(arr1, arr2, arr3) {
@@ -77,7 +80,7 @@ const rootReducer = (state = initialState, action) => {
             }
 
         case FILTER_BY_NAME:
-            console.log("reducer filt by name")
+            // console.log("reducer filt by name")
             return {
                 ...state,
                 // allPokemons: [...state.allPokemons, action.payload],
@@ -141,8 +144,20 @@ const rootReducer = (state = initialState, action) => {
                     }
             }
 
+        case RESET_DETAILS:
+            return {
+                ...state,
+                pokemon: {}
+            }
+
+        case SET_LOADING:
+            return {
+                ...state,
+                loading: (action.payload)
+            }
+
         case ORDER_ALL_POKEMONS:
-            console.log("ordenando por el orden ", action.payload)
+            // console.log("ordenando por el orden ", action.payload)
             var auxPokemon = [...state.allPokemons]
             switch (action.payload) {
                 case "A to Z":
@@ -152,21 +167,21 @@ const rootReducer = (state = initialState, action) => {
                         allPokemons: [...orderedPokemons]
                     }
                 case "Z to A":
-                    var orderedPokemons = auxPokemon.sort((a, b) => (a.name < b.name) ? 1 : -1);
+                    orderedPokemons = auxPokemon.sort((a, b) => (a.name < b.name) ? 1 : -1);
                     return {
                         ...state,
                         allPokemons: [...orderedPokemons]
                     }
                 case "by Strength (max)":
-                    console.log("no esta entrando a default")
-                    console.log(auxPokemon[0], auxPokemon[1])
-                    var orderedPokemons = auxPokemon.sort((a, b) => (a.strength < b.strength) ? 1 : -1);
+                    // console.log("no esta entrando a default")
+                    // console.log(auxPokemon[0], auxPokemon[1])
+                    orderedPokemons = auxPokemon.sort((a, b) => (a.strength < b.strength) ? 1 : -1);
                     return {
                         ...state,
                         allPokemons: [...orderedPokemons]
                     }
                 case "by Strength (min)":
-                    var orderedPokemons = auxPokemon.sort((a, b) => (a.strength > b.strength) ? 1 : -1);
+                    orderedPokemons = auxPokemon.sort((a, b) => (a.strength > b.strength) ? 1 : -1);
                     return {
                         ...state,
                         allPokemons: [...orderedPokemons]

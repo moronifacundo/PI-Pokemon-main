@@ -29,7 +29,7 @@ router.get("/pokemons", async (req, res) => {
     var { name } = req.query
     if (name) { var result = await model.getPokemon(name) }
     else {
-        console.log("haciedno getallpok")
+        // console.log("haciedno getallpok")
         return res.json(await model.getAllPokemon())
     }
     if (typeof result === "string") { res.status(404) }

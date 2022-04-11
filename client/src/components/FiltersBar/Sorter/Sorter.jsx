@@ -1,7 +1,7 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux'
-import { filterBySource, orderAllPokemons } from '../../../redux/actions';
-import { intersectFilters } from '../../../redux/actions';
+import { useDispatch} from 'react-redux'
+import {  orderAllPokemons } from '../../../redux/actions';
+// import { intersectFilters } from '../../../redux/actions';
 
 const TypeFilter = () => {
 
@@ -20,7 +20,7 @@ const TypeFilter = () => {
     // }
 
     const handleSubmit = (e) => {
-        console.log("handle submit with ", e.target.value)
+        // console.log("handle submit with ", e.target.value)
         dispatch(orderAllPokemons({ order: e.target.value }))
     }
 

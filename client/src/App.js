@@ -8,6 +8,7 @@ import Nav from './components/Nav/Nav';
 import CreatePokemon from './components/CreatePokemon/CreatePokemon';
 import FiltersBar from './components/FiltersBar/FiltersBar';
 import CreateBar from './components/CreateBar/CreateBar';
+import Error404 from './components/Error404/Error404';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Route exact path="/types" component={Types} />
       <Route exact path="/pokemon/create" component={CreatePokemon} />
       <Route exact path="/pokemons/:pokemonId" component={PokemonDetail} />
+      <Route exact path="/error/404" component={Error404} />
     </div>
   );
 }

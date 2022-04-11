@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { searchByName } from '../../../redux/actions'
+import { searchByName, setLoading } from '../../../redux/actions'
 import { resetFilter } from '../../../redux/actions';
 import { intersectFilters } from '../../../redux/actions';
 
@@ -25,6 +25,8 @@ const NameFilter = () => {
         if (!input.name) {
             dispatch(resetFilter("name"))
         } else {
+            // eslint-disable-next-line
+            dispatch(setLoading("Searching Pokemon..."))
             dispatch(searchByName({ ...input }))
         }
         dispatch(intersectFilters())
@@ -39,6 +41,7 @@ const NameFilter = () => {
         dispatch(intersectFilters())
         return () => {
         }
+        // eslint-disable-next-line
     }, [allPokemons])
 
     return (

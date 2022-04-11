@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { getPokemon } from '../../redux/actions';
+import { getPokemon, resetDetails, setLoading } from '../../redux/actions';
 import './PokemonDetail.css';
-
+import loading from '../../img/loading.gif'
 
 const PokemonDetail = (props) => {
 
@@ -11,16 +11,18 @@ const PokemonDetail = (props) => {
 
     React.useEffect(() => {
         dispatch(getPokemon(props.match.params.pokemonId))
-
+        dispatch(setLoading("Loading... Please Wait"))
         return () => {
+            dispatch(resetDetails())
         }
-    })
+        // eslint-disable-next-line
+    }, [])
 
     return (
         <div className='detalle'>
-            <h1>{pokemon.name}</h1>
+            <h1 className='name'>{pokemon.name}</h1>
             <img src={pokemon.img} alt={pokemon.name} />
-            <div className="stats">
+            {pokemon.name ? <div className="stats">
                 <p>hp: {pokemon.hp}</p>
                 <p>strength: {pokemon.strength}</p>
                 <p>defence: {pokemon.defence}</p>
@@ -32,6 +34,10 @@ const PokemonDetail = (props) => {
                     return (<p key={t?.id}>{t?.name}</p>)
                 })}
             </div>
+                : <div>
+                    <img src={loading} alt="Loading resources" />
+                    <p>Loading...</p>
+                </div>}
         </div>
     );
 };
