@@ -1,23 +1,24 @@
 const axios = require('axios');
 // const bodyParser = require('body-parser');
 const { Pokemon, Type } = require("../db");
-var pokeID = 1;
+var pokeID = 3001;
 
 module.exports = { // Instructor hace todo por front, SE TRAE todo desde el back, con esto
 
     getSummaryApiPokemon: async function () {
-        var nameUrls = (await axios.get('https://pokeapi.co/api/v2/pokemon?limit=4')).data.results
+        var nameUrls = (await axios.get('https://pokeapi.co/api/v2/pokemon?limit=40')).data.results
         var pokeDetails = await Promise.all(
-            nameUrls.map(async e => {  // await no servia con maps, tuve q usar promiseall
+            nameUrls.map(async (e, i) => {  // await no servia con maps, tuve q usar promiseall
                 try {
-
+                    // console.log(i)
                     var pokemonInfo = await axios.get(e.url);
-                    console.log("la url de ", e.name, "es ", e.url)
+                    // console.log("la url de ", e.name, "es ", e.url)
                     var ob = { ///// PRUEBA
                         // return {   //final
                         id: pokemonInfo.data.id,
                         name: pokemonInfo.data.name,
                         img: pokemonInfo.data.sprites.other["official-artwork"].front_default,
+                        strength: pokemonInfo.data.stats[1].base_stat,
                         types: pokemonInfo.data.types.map(iType => {
                             // var id = this.getTypeIdFromURL(iType.type.url) // para obtener el id de types
                             return {
@@ -26,16 +27,17 @@ module.exports = { // Instructor hace todo por front, SE TRAE todo desde el back
                             }
                         })
                     }
-                    console.log(ob); return (ob)   ///// PRUEBA
+                    // console.log(ob); ///// PRUEBA
+                    return (ob)
                 } catch (error) {
                     return { ///// PRUEBA
                         // return {   //final
                         id: Math.random,
-                        name: "no lo agarra",
+                        name: e.name,
                         img: "",
-                        types: ["fire"]
+                        types: ["unknown"]
                     }
-                 }
+                }
             }))
         return pokeDetails
     },
@@ -51,7 +53,7 @@ module.exports = { // Instructor hace todo por front, SE TRAE todo desde el back
     */
 
     getDbPokemon: async function () { // Para traerme los de la base de datos
-        console.log("entro a buscar a la db")
+        // console.log("entro a buscar a la db")
         return await Pokemon.findAll({
             include: {
                 model: Type,
@@ -65,7 +67,7 @@ module.exports = { // Instructor hace todo por front, SE TRAE todo desde el back
 
     getAllPokemon: async function () {
         const apiPokemon = await this.getSummaryApiPokemon();
-        console.log("trajo de la api")
+        // console.log("trajo de la api")
         const dbPokemon = await this.getDbPokemon();
         const totalPokemon = apiPokemon.concat(dbPokemon)
         return totalPokemon
@@ -122,6 +124,7 @@ module.exports = { // Instructor hace todo por front, SE TRAE todo desde el back
             }
             catch (error) {
                 return (`El pokemon ${querried} no existe`);
+                // return (error)
             }
             return (this.wantedPokeInfo(pokemon.data));
         }
@@ -149,7 +152,8 @@ module.exports = { // Instructor hace todo por front, SE TRAE todo desde el back
     },
 
     createPokemon: async function (name, hp, strength, defence, speed, height, weight, img, types, id = pokeID) {
-        console.log("agregando a base de datos " + name)
+        // console.log("agregando a base de datos " + name)
+        // console.log("con los types ", types)
         if (img === "") { img = "https://i.imgur.com/DfaZPXl.png" }
         pokeID++
         try {
@@ -168,16 +172,22 @@ module.exports = { // Instructor hace todo por front, SE TRAE todo desde el back
             });
             if (created) {
                 types?.map(async type => {
-                    console.log("adding type " + type)
-                    const newType = await Type.findOne({
-                        where: { name: type }
-                    })
-                    await newPokemon.addType(newType)
+                    // console.log("adding type " + type?.name)
+                    if (type.name) {
+
+                        const newType = await Type.findOne({
+                            where: { name: type?.name }
+                        })
+                        await newPokemon.addType(newType)
+                    }
                 })
-                return ("You've created " + name)
+                // return ("You've created " + name)
+                newPokemon.types = types
+                console.log("new pokemon ", newPokemon)
+                return (newPokemon)
             }
         } catch (error) {
-            return (error);
+            return (error.name);
         }
         return (name + " already exists. Try a different name")
     },

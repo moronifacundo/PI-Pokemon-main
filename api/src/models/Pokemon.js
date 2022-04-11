@@ -6,16 +6,16 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('pokemon', {
     id: {
-      type: DataTypes.INTEGER,  // Voy a usar un id de solo un numero, pero le voy a sumar 3000 para no pisar api (hay 898 id usados.)
+      type: DataTypes.INTEGER,  // Voy a usar un id de solo un numero, pero va a empezar de 3000 para no pisar api (hay 898 id usados.)
       allowNull: false,
       primaryKey: true,
       // autoIncrement: true,
       // get() {
       //   return 'db' + this.getDataValue('ide');
       // }
-      set(value) {
-        this.setDataValue('id', value + 3000);
-      }
+      // set(value) {
+      //   this.setDataValue('id', value + 3000);
+      // }
     },
     name: {
       type: DataTypes.STRING,

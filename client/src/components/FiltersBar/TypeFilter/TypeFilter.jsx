@@ -1,7 +1,8 @@
 import React from 'react';
-import { useDispatch } from 'react-redux'
-import { filterByType } from '../../redux/actions';
-import { fillPokemonStore } from '../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux'
+import { filterByType } from '../../../redux/actions';
+import { resetFilter } from '../../../redux/actions';
+import { intersectFilters } from '../../../redux/actions';
 
 const TypeFilter = () => {
 
@@ -10,6 +11,8 @@ const TypeFilter = () => {
     const [input, setInput] = React.useState({
         type: '',
     });
+
+    const allPokemons = useSelector(state => state.allPokemons)
 
     const handleInputChange = function (e) {
         setInput({
@@ -21,11 +24,23 @@ const TypeFilter = () => {
     const handleSubmit = function (e) {
         e.preventDefault();
         if (!input.type) {
-            dispatch(fillPokemonStore())
+            dispatch(resetFilter("type"))
         } else {
             dispatch(filterByType(input))  // {input: ----}
         }
+        dispatch(intersectFilters())
     }
+    // 
+    React.useEffect(() => {
+        if (!input.type) {
+            dispatch(resetFilter("type"))
+        } else {
+            dispatch(filterByType(input))  // {input: ----}
+        }
+        dispatch(intersectFilters())
+        return () => {
+        }
+    }, [allPokemons])
 
     return (
         <div>

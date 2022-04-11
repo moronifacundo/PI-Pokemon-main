@@ -20,6 +20,7 @@ var router = Router();
 router.get("/pokemons/:idPokemon", async (req, res) => {
     var { idPokemon } = req.params
     var result = (await model.getPokemon(idPokemon))
+    // console.log(result.response.status) // me tira el codigo de error
     if (typeof result === "string") { res.status(404) }
     res.json(result)
 })
