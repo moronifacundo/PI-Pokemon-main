@@ -10,7 +10,7 @@ class createPokemonWrapper extends Component {
                 <h2>Create your own Pokemon</h2>
                 <CreatePokemon
                     fullCreator={true}
-                    className="fullCreator" />
+                    sentClassName="fullCreator" />
             </div>
         );
     };

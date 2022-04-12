@@ -20,29 +20,32 @@ const NameFilter = () => {
         });
     }
 
-    const handleSubmit = function (e) {
+    const handleSubmit = (e) => {
+        console.log(e.target.name)
         e.preventDefault();
         if (!input.name) {
-            dispatch(resetFilter("name"))
+            dispatch(resetFilter("name"));
         } else {
             // eslint-disable-next-line
-            dispatch(setLoading("Searching Pokemon..."))
-            dispatch(searchByName({ ...input }))
+            console.log("enviando name filter")
+            dispatch(setLoading("Searching Pokemon..."));
+            dispatch(searchByName({ ...input }));
         }
-        dispatch(intersectFilters())
+        dispatch(intersectFilters());
     }
-    
-    React.useEffect(() => {
-        if (!input.name) {
-            dispatch(resetFilter("name"))
-        } else {
-            dispatch(searchByName({ ...input }))  // {input: ----}
-        }
-        dispatch(intersectFilters())
-        return () => {
-        }
-        // eslint-disable-next-line
-    }, [allPokemons])
+
+    // React.useEffect(() => {
+    //     if (!input.name) {
+    //         dispatch(resetFilter("name"))
+    //     } else {
+    //         console.log("aca lo hace")
+    //         dispatch(searchByName({ ...input }))  // {input: ----}
+    //     }
+    //     dispatch(intersectFilters())
+    //     return () => {
+    //     }
+    //     // eslint-disable-next-line
+    // }, [allPokemons])
 
     return (
         <div>
@@ -55,7 +58,7 @@ const NameFilter = () => {
                         value={input["name"]}
                         onChange={handleInputChange} />
                 </div>
-
+                <input type="submit" name="enviar" id="" />
             </form>
 
         </div>

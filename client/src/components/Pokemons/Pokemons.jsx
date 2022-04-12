@@ -35,6 +35,10 @@ const Pokemons = (props) => {
         }
     }, [dispatch])
 
+    React.useEffect(() => {
+        setPage(1)
+    }, [pokemons])
+
     return (
         <div>
             {(!loading) ? <div className='pages'>
@@ -60,7 +64,7 @@ const Pokemons = (props) => {
             <h1>Pokemons</h1>
             {/* <img src={img} alt="main-img" /> */}
             <div className='pokemons'>
-                {
+                {(pokemons.length) || loading ?
                     pokemons?.map((p, i) => {
                         if (inPage(i)) {
                             // if (true) {
@@ -81,6 +85,12 @@ const Pokemons = (props) => {
                         }
                         return false//ESTO ES SOLO POR UN WARNING
                     })
+                    : <div className='notPokemonsFound'>
+                        <img
+                            src="https://stickers.wiki/static/stickers/piikachu/file_948258.gif"
+                            alt="Not Pokemons found" />
+                        <h4>Not pokemons found</h4>
+                    </div>
                 }
             </div>
         </div>

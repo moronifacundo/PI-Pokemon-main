@@ -35,7 +35,7 @@ const TypeFilter = () => {
                     <div>
                         <input
                             onClick={handleSubmit}
-                            className='radio'
+                            className='orderBtn'
                             type="button"
                             id="A to Z"
                             name="order"
@@ -45,7 +45,7 @@ const TypeFilter = () => {
                     <div>
                         <input
                             onClick={handleSubmit}
-                            className='radio'
+                            className='orderBtn'
                             type="button"
                             id="Z to A"
                             name="order"
@@ -55,7 +55,7 @@ const TypeFilter = () => {
                     <div>
                         <input
                             onClick={handleSubmit}
-                            className='radio'
+                            className='orderBtn'
                             type="button"
                             id="by Strength (max)"
                             name="order"
@@ -65,7 +65,7 @@ const TypeFilter = () => {
                     <div>
                         <input
                             onClick={handleSubmit}
-                            className='radio'
+                            className='orderBtn'
                             type="button"
                             id="by Strength (min)"
                             name="order"

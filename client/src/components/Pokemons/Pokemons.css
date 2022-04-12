@@ -1,7 +1,7 @@
 div .pokemons {
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(3, 1fr);
     max-width: 900px;
     max-height: 900px;
 }
@@ -13,4 +13,9 @@ div .pokemons {
 
 .cardBox {
     margin: 5px;
+}
+
+.notPokemonsFound {
+    grid-area: 1 / 1 / 4 / 4;
+    margin: 0 auto;
 }

@@ -7,7 +7,7 @@ import PokemonDetailCard from '../PokemonDetail/PokemonDetailCard';
 
 const CreatePokemon = (props) => {
     const dispatch = useDispatch()
-    // console.log(props)
+    // console.log("el props:", props.sentClassName)
     const [input, setInput] = React.useState({
         name: '',
         hp: '',
@@ -127,16 +127,16 @@ const CreatePokemon = (props) => {
         // eslint-disable-next-line
     }, [input])
 
-    const handleSubmit = function (e) {
+    const handleSubmit = (e) => {
         e.preventDefault();
         // console.log("handle submit", { ...input, types: [input.type1, input.type2] })
-        dispatch(setLoading("Creating Pokemon..."))
-        dispatch(createPokemon({ ...input, types: [{ name: input.type1 }, { name: input.type2 }] }))
-        setDisabled(true)
+        dispatch(setLoading("Creating Pokemon..."));
+        dispatch(createPokemon({ ...input, types: [{ name: input.type1 }, { name: input.type2 }] }));
+        setDisabled(true);
     }
 
     return (
-        <div>
+        <div className={props.sentClassName}>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Name: </label>
@@ -223,8 +223,9 @@ const CreatePokemon = (props) => {
 
                 <div>
                     <select
+
                         name="type1"
-                        className="type_input"
+                        className={"type_input " + props.sentClassName}
                         onChange={handleInputChange}
                         defaultValue="disabled">
                         <option value=''>-- Seleccione tipo --</option>
@@ -254,7 +255,7 @@ const CreatePokemon = (props) => {
                 <div>
                     <select
                         name="type2"
-                        className="type_input"
+                        className={"type_input " + props.sentClassName}
                         onChange={handleInputChange}
                         defaultValue="disabled">
                         <option value='' >-- Seleccione tipo --</option>
@@ -280,9 +281,20 @@ const CreatePokemon = (props) => {
                         <option value="shadow" className="type_option">shadow</option>
                     </select>
                 </div>
-                {!errorAttributes.types ? null : <p className='errorMsg'>{errorAttributes.types}</p>}
+                {!errorAttributes.types
+                    ?
+                    <div>
+                        <br className='errorMsg transparent'></br>
+                        <br className='errorMsg transparent'></br>
+                        <br className='errorMsg transparent'></br>
+                    </div>
+                    : <p className='errorMsg'>{errorAttributes.types}</p>}
 
-                <button disabled={disabled} type="submit">Create</button>
+                <button
+                    disabled={disabled}
+                    type="submit"
+                >Create
+                </button>
 
                 {/* //SHOWING THE POKEMON TO THE USER */}
                 {(props.fullCreator)

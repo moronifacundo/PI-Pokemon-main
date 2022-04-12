@@ -4,10 +4,10 @@
     font-weight: 500;
 }
 
-.goFull {
-    position: absolute;
-    width: 100%;
-    bottom: 30px;
-    
+.transparent {
+    color: transparent
+}
 
+.fullCreator select {
+    width: 50%;
 }

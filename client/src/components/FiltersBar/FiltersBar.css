@@ -5,7 +5,7 @@
     width: 15%;
 }
 
-.searchByName, .filters{
+.searchByName, .filters {
     background-color: bisque;
     border-radius: 25px;
     padding: 15px;
@@ -15,3 +15,45 @@
 .marginBot {
     margin-bottom: 40px;
 }
+
+.orderBtn {
+    border-radius: 5px;
+    width: 90%;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin-bottom: 1px;
+}
+
+.orderBtn:hover {
+    cursor: pointer;
+}
+
+select {
+    border-radius: 5px;
+    width: 90%;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+
+/* .type_select,  */
+/* .type_option,
+.type_input { */
+/* font-family: Arial, Helvetica, sans-serif; */
+/* background-color: transparent; */
+/* font-size: 2rem; */
+/* color: var(--bb); */
+/* text-align: center;
+    width: 90%;
+    margin-bottom: 1rem; */
+/* border-style: solid; */
+/* border-color: var(--ppo); */
+/* border-width: .5rem; */
+/* text-align-last: center; */
+/* } */
+
+/* .type_option {
+    color: black; */
+/* } */
