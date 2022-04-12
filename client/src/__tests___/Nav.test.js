@@ -20,15 +20,16 @@ describe("<Nav />", () => {
     expect(nav.find(Link).length).toBeGreaterThanOrEqual(3);
   });
 
-  it('The first link should be "Home" and rout to "/"', () => {
-    // El orden en el que se declaran los Links es importante!
-    expect(nav.find(Link).at(0).prop("to")).toEqual("/");
-    expect(nav.find(Link).at(0).text()).toEqual("Home");
+
+  it('The first link should be "Create Pokemon" and should route to "/pokemon/create"', () => {
+    expect(nav.find(Link).at(0).prop("to")).toEqual("/pokemon/create");
+    expect(nav.find(Link).at(0).text()).toEqual("Create Pokemon");
   });
 
-  it('The second link should be "Create Pokemon" and should route to "/pokemon/create"', () => {
-    expect(nav.find(Link).at(1).prop("to")).toEqual("/pokemon/create");
-    expect(nav.find(Link).at(1).text()).toEqual("Create Pokemon");
+  it('The second link should be "Home" and rout to "/"', () => {
+    // El orden en el que se declaran los Links es importante!
+    expect(nav.find(Link).at(1).prop("to")).toEqual("/");
+    expect(nav.find(Link).at(1).text()).toEqual("Home");
   });
 
   it('The third link should be "Pokemons" and should route to "/pokemons/"', () => {

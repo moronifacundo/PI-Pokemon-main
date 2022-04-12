@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Nav.css'
 
 class Nav extends Component {
@@ -8,21 +8,14 @@ class Nav extends Component {
         return (
             <div>
                 <header>
-                    <nav>
-                        <ul>
-                            <li>
-                                <Link to="/" >Home</Link>
-                            </li>
-                            <li>
-                                <Link to="/pokemon/create" >Create Pokemon</Link>
-                            </li>
-                            <li>
-                                <Link to="/pokemons/" >Pokemons</Link>
-                            </li>
-                            {/* <li>
-                                <Link to="/types" >Types</Link>
-                            </li> */}
-                        </ul>
+                    <nav className='nav'>
+
+                        <NavLink className="navLink" activeClassName='selected' exact to="/" >Home</NavLink>
+
+                        <NavLink className="navLink" activeClassName='selected' exact to="/pokemons/" >Pokemons</NavLink>
+
+                        <NavLink className="navLink" activeClassName='selected' to="/pokemon/create" >Create Pokemon</NavLink>
+                        {/* <Link to="/types" >Types</Link> */}
                     </nav>
                 </header>
             </div>

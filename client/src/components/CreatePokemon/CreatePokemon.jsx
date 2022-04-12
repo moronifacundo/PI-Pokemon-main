@@ -1,10 +1,13 @@
 import React from 'react';
 import { createPokemon, setLoading } from '../../redux/actions';
 import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom';
+import PokemonDetailCard from '../PokemonDetail/PokemonDetailCard';
 
-const CreatePokemon = () => {
+
+const CreatePokemon = (props) => {
     const dispatch = useDispatch()
-
+    // console.log(props)
     const [input, setInput] = React.useState({
         name: '',
         hp: '',
@@ -87,7 +90,9 @@ const CreatePokemon = () => {
                 // console.log("entra al switch de error")
                 setErrorAttributes({
                     ...errorAttributes,
-                    [name]: (numPattern.test(value) && value <= 200) ? '' : [name] + ' must be an integer positive number under 200',
+                    [name]: (numPattern.test(value)
+                        // && value <= 200  // en caso de querer un limite de valores
+                    ) ? '' : [name] + ' must be an integer positive number',
                 });
                 break;
 
@@ -141,7 +146,7 @@ const CreatePokemon = () => {
                         name="name"
                         value={input["name"]}
                         onChange={handleInputChange} />
-                    {!errorName ? null : <div>{errorName}</div>}
+                    {!errorName ? <br /> : <div className='errorMsg'>{errorName}</div>}
                 </div>
 
                 <div>
@@ -151,7 +156,7 @@ const CreatePokemon = () => {
                         name="hp"
                         value={input["hp"]}
                         onChange={handleInputChange} />
-                    {!errorAttributes.hp ? null : <div>{errorAttributes.hp}</div>}
+                    {!errorAttributes.hp ? null : <div className='errorMsg'>{errorAttributes.hp}</div>}
                 </div>
 
                 <div>
@@ -161,7 +166,7 @@ const CreatePokemon = () => {
                         name="defence"
                         value={input["defence"]}
                         onChange={handleInputChange} />
-                    {!errorAttributes.defence ? null : <div>{errorAttributes.defence}</div>}
+                    {!errorAttributes.defence ? null : <div className='errorMsg'>{errorAttributes.defence}</div>}
                 </div>
 
                 <div>
@@ -171,7 +176,7 @@ const CreatePokemon = () => {
                         name="speed"
                         value={input["speed"]}
                         onChange={handleInputChange} />
-                    {!errorAttributes.speed ? null : <div>{errorAttributes.speed}</div>}
+                    {!errorAttributes.speed ? null : <div className='errorMsg'>{errorAttributes.speed}</div>}
 
                 </div>
 
@@ -182,7 +187,7 @@ const CreatePokemon = () => {
                         name="strength"
                         value={input["strength"]}
                         onChange={handleInputChange} />
-                    {!errorAttributes.strength ? null : <div>{errorAttributes.strength}</div>}
+                    {!errorAttributes.strength ? null : <div className='errorMsg'>{errorAttributes.strength}</div>}
                 </div>
 
                 <div>
@@ -192,7 +197,7 @@ const CreatePokemon = () => {
                         name="height"
                         value={input["height"]}
                         onChange={handleInputChange} />
-                    {!errorAttributes.height ? null : <div>{errorAttributes.defence}</div>}
+                    {!errorAttributes.height ? null : <div className='errorMsg'>{errorAttributes.height}</div>}
                 </div>
 
                 <div>
@@ -202,7 +207,7 @@ const CreatePokemon = () => {
                         name="weight"
                         value={input["weight"]}
                         onChange={handleInputChange} />
-                    {!errorAttributes.weight ? null : <div>{errorAttributes.weight}</div>}
+                    {!errorAttributes.weight ? null : <div className='errorMsg'>{errorAttributes.weight}</div>}
                 </div>
 
                 <div>
@@ -213,7 +218,7 @@ const CreatePokemon = () => {
                         name="img"
                         value={input["img"]}
                         onChange={handleInputChange} />
-                    {!errorUrl ? null : <div>{errorUrl}</div>}
+                    {!errorUrl ? null : <div className='errorMsg'>{errorUrl}</div>}
                 </div>
 
                 <div>
@@ -275,9 +280,37 @@ const CreatePokemon = () => {
                         <option value="shadow" className="type_option">shadow</option>
                     </select>
                 </div>
-                {!errorAttributes.types ? null : <p>{errorAttributes.types}</p>}
+                {!errorAttributes.types ? null : <p className='errorMsg'>{errorAttributes.types}</p>}
 
                 <button disabled={disabled} type="submit">Create</button>
+
+                {/* //SHOWING THE POKEMON TO THE USER */}
+                {(props.fullCreator)
+                    ? <div>
+                        <h3>You are creating...</h3>
+                        <PokemonDetailCard
+                            name={input["name"]}
+                            types={[{ name: input.type1 }, { name: input.type2 }]}
+                            img={input["img"]}
+                            id={input.id}
+                            hp={input.hp}
+                            strength={input.strength}
+                            defence={input.defence}
+                            speed={input.speed}
+                            height={input.height}
+                            weight={input.weight}
+                        />
+                    </div>
+                    : <div>
+                        <br />
+                        <div className='goFull'>
+                            <Link className="nodec navLink "
+                                to='/pokemon/create'>
+                                Go to full creator
+                            </Link>
+                        </div>
+                    </div>}
+
 
             </form>
 

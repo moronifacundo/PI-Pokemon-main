@@ -5,11 +5,11 @@ import Pokemons from './components/Pokemons/Pokemons';
 import PokemonDetail from './components/PokemonDetail/PokemonDetail';
 import LandingPage from './components/LandingPage/LandingPage';
 import Nav from './components/Nav/Nav';
-import CreatePokemon from './components/CreatePokemon/CreatePokemon';
 import FiltersBar from './components/FiltersBar/FiltersBar';
 import CreateBar from './components/CreateBar/CreateBar';
 import ErrorPokemon404 from './components/ErrorPokemon404/ErrorPokemon404';
 import notFound from './components/notFound/notFound';
+import createPokemonWrapper from './components/CreatePokemon/CreatePokemonWrapper.jsx';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
       <Switch>
         <Route exact path="/pokemons" component={Pokemons} />
         <Route exact path="/types" component={Types} />
-        <Route exact path="/pokemon/create" component={CreatePokemon} />
+        <Route exact path="/pokemon/create" component={createPokemonWrapper} />
         <Route exact path="/pokemons/:pokemonId" component={PokemonDetail} />
         <Route exact path="/error/404" component={ErrorPokemon404} />
         <Route exact path="/404notFound" component={notFound} />

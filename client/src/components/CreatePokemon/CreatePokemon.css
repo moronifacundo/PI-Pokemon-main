@@ -1,0 +1,13 @@
+.errorMsg {
+    font-size: 0.8rem;
+    color: red;
+    font-weight: 500;
+}
+
+.goFull {
+    position: absolute;
+    width: 100%;
+    bottom: 30px;
+    
+
+}

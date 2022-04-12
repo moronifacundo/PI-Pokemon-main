@@ -10,9 +10,9 @@ const PokemonCard = (props) => {
     // e.target.onerror = null;
     // e.this.src= 'https://placeimg.com/200/300/animals'
     // }
-
     return (
         <div key={props.name} className='card buttonCard'>
+
             <h1 className='name'>{props.name}</h1>
             <img className='img'
                 src={props.img}

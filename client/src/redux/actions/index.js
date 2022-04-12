@@ -46,12 +46,13 @@ export function createPokemon(payload) {
         try {
             await axios.get('http://localhost:3001/pokemons?name=' + payload.name.toLowerCase());
             alert("There is another pokemon with that name. Try a different one")
-            return
+            return dispatch({ type: SET_LOADING, payload: "" })
         } catch (error) {
             console.log("Pokemon doesn't exist, you may continue")
         }
         if (payload.img === "") { payload.img = "https://i.imgur.com/DfaZPXl.png" }
         if (!(payload.types[0] || payload.types[1])) { payload.types = [{ name: "normal" }] }
+        const cleanedTypes = payload.types.filter(t => t.name)
         // console.log("el payload es... ", payload)
         const newPokemon = await axios.post('http://localhost:3001/pokemons', payload);
         // console.log("el post devolvio ,", newPokemon.data)
@@ -59,7 +60,7 @@ export function createPokemon(payload) {
         dispatch({ type: SET_LOADING, payload: "" })
         return dispatch({
             type: CREATE_POKEMON,
-            payload: { ...newPokemon.data, types: payload.types }
+            payload: { ...newPokemon.data, types: cleanedTypes }
         })
     }
 };
@@ -84,7 +85,7 @@ export const searchByName = (payload) => async dispatch => {
         return dispatch({ type: FILTER_BY_NAME, payload: pokemon.data });
     } catch (error) {
         dispatch({ type: SET_LOADING, payload: "" })
-        alert("el pokemon buscado no existe")
+        alert("The pokemon " + payload.name + " doesn't exist")
     }
 };
 
