@@ -16,8 +16,8 @@ describe("<Nav />", () => {
     expect(isReact.classComponent(Nav)).toBeTruthy();
   });
 
-  it('Should have four links <Link to="" />.', () => {
-    expect(nav.find(Link).length).toBeGreaterThanOrEqual(2);
+  it('Should have three links <Link to="" />.', () => {
+    expect(nav.find(Link).length).toBeGreaterThanOrEqual(3);
   });
 
   it('The first link should be "Home" and rout to "/"', () => {
@@ -36,9 +36,9 @@ describe("<Nav />", () => {
     expect(nav.find(Link).at(2).text()).toEqual("Pokemons");
   });
 
-  it('The fourth link should be "Types" and should route to "/types"', () => {
-    expect(nav.find(Link).at(3).prop("to")).toEqual("/types");
-    expect(nav.find(Link).at(3).text()).toEqual("Types");
-  });
+  // it('The fourth link should be "Types" and should route to "/types"', () => {
+  //   expect(nav.find(Link).at(3).prop("to")).toEqual("/types");
+  //   expect(nav.find(Link).at(3).text()).toEqual("Types");
+  // });
 
 });

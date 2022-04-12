@@ -19,9 +19,9 @@ class Nav extends Component {
                             <li>
                                 <Link to="/pokemons/" >Pokemons</Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link to="/types" >Types</Link>
-                            </li>
+                            </li> */}
                         </ul>
                     </nav>
                 </header>
