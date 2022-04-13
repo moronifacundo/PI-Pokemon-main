@@ -58,6 +58,7 @@ export function createPokemon(payload) {
         // console.log("el post devolvio ,", newPokemon.data)
         await axios.get('http://localhost:3001/pokemons', payload);
         dispatch({ type: SET_LOADING, payload: "" })
+        alert("You have created " + payload.name)
         return dispatch({
             type: CREATE_POKEMON,
             payload: { ...newPokemon.data, types: cleanedTypes }

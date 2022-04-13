@@ -6,7 +6,7 @@
 }
 
 .card {
-    background-color: bisque;
+    background-color: var(--card);
     margin: 5px;
     text-decoration: none;
     height: 100%;

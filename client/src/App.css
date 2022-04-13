@@ -1,6 +1,22 @@
+:root {
+  --nav: #45C04E;
+  --nav: #2D9F69;
+  --card: #C6DD95;
+  --verdebrillo: #65E355;
+  --verdes: #35D377;
+  --verdesin: #6FC75A;
+  --verdeclaro: #4CE279;
+  --bars: #1EA3C2;
+  --celeste: #2FC8D6;
+  --inset: #0d2415;
+  --error: #841014;
+  --fuentepp: 'Staatliches', cursive;
+}
+
+
 .App {
   text-align: center;
-  max-width: 80%;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -34,6 +50,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

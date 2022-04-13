@@ -1,5 +1,5 @@
 .detalle {
-    background-color: bisque;
+    background-color: var(--card);
     display: grid;
     grid-template-columns: repeat(3fr, 1fr);
     grid-template-rows: repeat(5fr, 1fr);

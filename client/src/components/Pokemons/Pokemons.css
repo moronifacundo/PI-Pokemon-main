@@ -8,11 +8,12 @@ div .pokemons {
 
 .nodec {
     text-decoration: none;
-    color: black;
+    color:   var(--nn);;
 }
 
 .cardBox {
     margin: 5px;
+    max-height: 200;
 }
 
 .notPokemonsFound {

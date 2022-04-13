@@ -146,7 +146,11 @@ const CreatePokemon = (props) => {
                         name="name"
                         value={input["name"]}
                         onChange={handleInputChange} />
-                    {!errorName ? <br /> : <div className='errorMsg'>{errorName}</div>}
+                    {!errorName ?
+                        <div>
+                            <br className='errorMsg transparent'></br>
+                        </div>
+                        : <div className='errorMsg'>{errorName}</div>}
                 </div>
 
                 <div>
@@ -156,7 +160,11 @@ const CreatePokemon = (props) => {
                         name="hp"
                         value={input["hp"]}
                         onChange={handleInputChange} />
-                    {!errorAttributes.hp ? null : <div className='errorMsg'>{errorAttributes.hp}</div>}
+                    {!errorAttributes.hp ?
+                        <div>
+                            <br className='errorMsg transparent'></br>
+                        </div>
+                        : <div className='errorMsg'>{errorAttributes.hp}</div>}
                 </div>
 
                 <div>
@@ -166,7 +174,11 @@ const CreatePokemon = (props) => {
                         name="defence"
                         value={input["defence"]}
                         onChange={handleInputChange} />
-                    {!errorAttributes.defence ? null : <div className='errorMsg'>{errorAttributes.defence}</div>}
+                    {!errorAttributes.defence ?
+                        <div>
+                            <br className='errorMsg transparent'></br>
+                        </div>
+                        : <div className='errorMsg'>{errorAttributes.defence}</div>}
                 </div>
 
                 <div>
@@ -176,7 +188,11 @@ const CreatePokemon = (props) => {
                         name="speed"
                         value={input["speed"]}
                         onChange={handleInputChange} />
-                    {!errorAttributes.speed ? null : <div className='errorMsg'>{errorAttributes.speed}</div>}
+                    {!errorAttributes.speed ?
+                        <div>
+                            <br className='errorMsg transparent'></br>
+                        </div>
+                        : <div className='errorMsg'>{errorAttributes.speed}</div>}
 
                 </div>
 
@@ -187,7 +203,11 @@ const CreatePokemon = (props) => {
                         name="strength"
                         value={input["strength"]}
                         onChange={handleInputChange} />
-                    {!errorAttributes.strength ? null : <div className='errorMsg'>{errorAttributes.strength}</div>}
+                    {!errorAttributes.strength ?
+                        <div>
+                            <br className='errorMsg transparent'></br>
+                        </div>
+                        : <div className='errorMsg'>{errorAttributes.strength}</div>}
                 </div>
 
                 <div>
@@ -197,7 +217,11 @@ const CreatePokemon = (props) => {
                         name="height"
                         value={input["height"]}
                         onChange={handleInputChange} />
-                    {!errorAttributes.height ? null : <div className='errorMsg'>{errorAttributes.height}</div>}
+                    {!errorAttributes.height ?
+                        <div>
+                            <br className='errorMsg transparent'></br>
+                        </div>
+                        : <div className='errorMsg'>{errorAttributes.height}</div>}
                 </div>
 
                 <div>
@@ -207,7 +231,11 @@ const CreatePokemon = (props) => {
                         name="weight"
                         value={input["weight"]}
                         onChange={handleInputChange} />
-                    {!errorAttributes.weight ? null : <div className='errorMsg'>{errorAttributes.weight}</div>}
+                    {!errorAttributes.weight ?
+                        <div>
+                            <br className='errorMsg transparent'></br>
+                        </div>
+                        : <div className='errorMsg'>{errorAttributes.weight}</div>}
                 </div>
 
                 <div>
@@ -218,7 +246,11 @@ const CreatePokemon = (props) => {
                         name="img"
                         value={input["img"]}
                         onChange={handleInputChange} />
-                    {!errorUrl ? null : <div className='errorMsg'>{errorUrl}</div>}
+                    {!errorUrl ?
+                        <div>
+                            <br className='errorMsg transparent'></br>
+                        </div>
+                        : <div className='errorMsg'>{errorUrl}</div>}
                 </div>
 
                 <div>

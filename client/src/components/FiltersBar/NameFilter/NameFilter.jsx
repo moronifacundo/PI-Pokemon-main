@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { searchByName, setLoading } from '../../../redux/actions'
 import { resetFilter } from '../../../redux/actions';
 import { intersectFilters } from '../../../redux/actions';
@@ -7,7 +7,7 @@ import { intersectFilters } from '../../../redux/actions';
 const NameFilter = () => {
 
     const dispatch = useDispatch()
-    const allPokemons = useSelector(state => state.allPokemons)
+    // const allPokemons = useSelector(state => state.allPokemons)
 
     const [input, setInput] = React.useState({
         name: '',

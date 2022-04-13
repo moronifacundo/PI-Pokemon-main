@@ -1,7 +1,7 @@
 .errorMsg {
     font-size: 0.8rem;
-    color: red;
-    font-weight: 500;
+    color: var(--error);
+    font-weight: 600;
 }
 
 .transparent {

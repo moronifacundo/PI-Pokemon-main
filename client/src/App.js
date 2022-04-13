@@ -10,10 +10,11 @@ import CreateBar from './components/CreateBar/CreateBar';
 import ErrorPokemon404 from './components/ErrorPokemon404/ErrorPokemon404';
 import notFound from './components/notFound/notFound';
 import createPokemonWrapper from './components/CreatePokemon/CreatePokemonWrapper.jsx';
+// import background from './img/bgapp.png'
 
 function App() {
   return (
-    <div className="App">
+    <div className="App background">
       <Route exact path="/" component={LandingPage} />
       <Route path="/:any" component={Nav} />
       <Route exact path="/:any" component={FiltersBar} />
