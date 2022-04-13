@@ -26,10 +26,14 @@ div .landImg {
 
 
 .bgContainer {
+    margin: 0;
+}
+
+.bgContainer {
     background-image: url(../../img/bgImg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 27rem;
+    height: 29rem;
     padding-top: 10rem;
     align-items: center;
     position: relative;
