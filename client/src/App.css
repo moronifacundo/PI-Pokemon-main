@@ -68,3 +68,7 @@ p {
 h4 {
   margin-bottom: 2px;
 }
+
+button:hover {
+  cursor: pointer;
+}

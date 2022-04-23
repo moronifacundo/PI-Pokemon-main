@@ -15,21 +15,22 @@ export const ORDER_ALL_POKEMONS = 'ORDER_ALL_POKEMONS';
 export const INTERSECT = 'INTERSECT';
 
 //////////////////////
-
-export const getAllPokemons = () => dispatch => {
-    return fetch("http://localhost:3001/pokemons")
-        .then(response => response.json())
-        .then(json => {
-            dispatch({ type: GET_ALL_POKEMONS, payload: json });
-            dispatch({ type: SET_LOADING, payload: "" })
-        });
+export const getAllPokemons = () => async dispatch => {
+    try {
+        var allPokemonsArray = await axios.get("http://localhost:3001/pokemons");
+        dispatch({ type: SET_LOADING, payload: "" })
+        return dispatch({
+            type: GET_ALL_POKEMONS, payload: allPokemonsArray.data
+        })
+    } catch (error) {
+        return error
+    }
 };
 
 export function getPokemon(payload) {
     return async function (dispatch) {
         try {
             let pokemonDetails = await axios.get('http://localhost:3001/pokemons/' + payload);
-            console.log(pokemonDetails.data)
             return dispatch({
                 type: GET_POKEMON,
                 payload: pokemonDetails.data
@@ -50,28 +51,24 @@ export function createPokemon(payload) {
         } catch (error) {
             console.log("Pokemon doesn't exist, you may continue")
         }
-        if (payload.img === "") { payload.img = "https://i.imgur.com/DfaZPXl.png" }
-        if (!(payload.types[0] || payload.types[1])) { payload.types = [{ name: "normal" }] }
-        const cleanedTypes = payload.types.filter(t => t.name)
-        // console.log("el payload es... ", payload)
         const newPokemon = await axios.post('http://localhost:3001/pokemons', payload);
-        // console.log("el post devolvio ,", newPokemon.data)
         await axios.get('http://localhost:3001/pokemons', payload);
         dispatch({ type: SET_LOADING, payload: "" })
         alert("You have created " + payload.name)
         return dispatch({
             type: CREATE_POKEMON,
-            payload: { ...newPokemon.data, types: cleanedTypes }
+            payload: { ...newPokemon.data, types: payload.types }
         })
     }
 };
 
-export const getTypes = () => dispatch => {
-    return fetch("http://localhost:3001/types")
-        .then(response => response.json())
-        .then(json => {
-            dispatch({ type: GET_TYPES, payload: json });
-        });
+export const getTypes = () => async dispatch => {
+    try {
+        var types = await axios("http://localhost:3001/types")
+        return dispatch({ type: GET_TYPES, payload: types.data })
+    } catch (error) {
+        return error
+    }
 };
 
 export const deletePokemon = (payload) => {
@@ -91,7 +88,6 @@ export const searchByName = (payload) => async dispatch => {
 };
 
 export const resetFilter = (payload) => {
-    // console.log("reseteando filter ", payload)
     return { type: RESET_FILTER, payload };
 };
 
@@ -104,21 +100,17 @@ export const setLoading = (payload) => {
 };
 
 export const filterByType = (payload) => {
-    // console.log("filtra by type, ", payload.type)
     return { type: FILTER_BY_TYPE, payload: payload.type };
 };
 
 export const filterBySource = (payload) => {
-    // console.log("filtra by source, ", payload.source)
     return { type: FILTER_BY_SOURCE, payload: payload.source };
 };
 
 export const orderAllPokemons = (payload) => {
-    // console.log("actions esta")
     return { type: ORDER_ALL_POKEMONS, payload: payload.order };
 };
 
 export const intersectFilters = (payload) => {
-    // console.log("intersectando!")
     return { type: INTERSECT }
 }

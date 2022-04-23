@@ -4,10 +4,9 @@ import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
 import PokemonDetailCard from '../PokemonDetail/PokemonDetailCard';
 
-
 const CreatePokemon = (props) => {
     const dispatch = useDispatch()
-    // console.log("el props:", props.sentClassName)
+
     const [input, setInput] = React.useState({
         name: '',
         hp: '',
@@ -19,7 +18,6 @@ const CreatePokemon = (props) => {
         img: '',
         type1: '',
         type2: '',
-        types: []
     });
 
     const [errorName, setErrorName] = React.useState('');
@@ -52,8 +50,6 @@ const CreatePokemon = (props) => {
 
     const validarTypes = function () {
         let error = '';
-        // console.log("type 1", input.type1)
-        // console.log("tyype 2", input.type2)
 
         if (input["type1"] === input["type2"]) {
             error = 'types must be different from eachother, and you need at least one'
@@ -67,8 +63,6 @@ const CreatePokemon = (props) => {
 
     const handleInputChange = function (e) {
         const { value, name } = e.target;
-        // let errors = this.state.errors;
-        // console.log(name)
         var namePattern = /^([a-zA-Z]+)(\s[a-zA-Z]+)*$/;
         var numPattern = /^\d+$/;
         var urlPattern = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
@@ -129,9 +123,16 @@ const CreatePokemon = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log("handle submit", { ...input, types: [input.type1, input.type2] })
         dispatch(setLoading("Creating Pokemon..."));
-        dispatch(createPokemon({ ...input, types: [{ name: input.type1 }, { name: input.type2 }] }));
+        // if (input.img === "") { input.img = "https://i.imgur.com/DfaZPXl.png" }
+        if (input.img === "") {
+            setInput({ ...input, img: "https://i.imgur.com/DfaZPXl.png" })
+        }
+        const types = []
+        if (input.type1) { types.push({ name: input.type1 }) }
+        if (input.type2) { types.push({ name: input.type2 }) }
+        console.log("handle submit", input)
+        dispatch(createPokemon({ ...input, types: types }));
         setDisabled(true);
     }
 
@@ -255,12 +256,11 @@ const CreatePokemon = (props) => {
 
                 <div>
                     <select
-
                         name="type1"
                         className={"type_input " + props.sentClassName}
                         onChange={handleInputChange}
                         defaultValue="disabled">
-                        <option value=''>-- Seleccione tipo --</option>
+                        <option value=''>-- Select Type --</option>
                         <option value="normal" className="type_option">normal</option>
                         <option value="fighting" className="type_option">fighting</option>
                         <option value="flying" className="type_option">flying</option>
@@ -290,7 +290,7 @@ const CreatePokemon = (props) => {
                         className={"type_input " + props.sentClassName}
                         onChange={handleInputChange}
                         defaultValue="disabled">
-                        <option value='' >-- Seleccione tipo --</option>
+                        <option value='' >-- Select Type --</option>
                         <option value="normal" className="type_option">normal</option>
                         <option value="fighting" className="type_option">fighting</option>
                         <option value="flying" className="type_option">flying</option>
@@ -313,6 +313,7 @@ const CreatePokemon = (props) => {
                         <option value="shadow" className="type_option">shadow</option>
                     </select>
                 </div>
+                
                 {!errorAttributes.types
                     ?
                     <div>

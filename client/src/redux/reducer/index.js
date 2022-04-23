@@ -26,7 +26,7 @@ const initialState = {
 };
 
 function intersect(arr1, arr2, arr3) {
-    // HERMOSO CODE Q ENCONTRE QUE BUSCA INTERESECCIONES -> los ordena por como aparecen e el primero
+    // HERMOSO CODE Q ENCONTRE QUE BUSCA INTERESECCIONES -> los ordena por como aparecen en el primero
     // var array1 = [666, "Lorem", "quick", "ipsum", "dolor"],
     // array2 = ["Lorem", "ipsum", 666, "quick", "brown", "foo"],
     // array3 = ["quick","Jumps",666, "Over", "Lazy", "ipsum","quick", "Lorem"],

@@ -2,7 +2,7 @@ const { Router } = require('express');
 // const express = require('express'); // esto no estaba
 const model = require("../modelFunctions/model");
 // const { Pokemon } = require("../models/Pokemon");
-// const { Type } = require("../models/Type");
+const { Type } = require("../db");
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -51,6 +51,12 @@ router.post("/pokemons", async (req, res) => {
 //   /// GET
 router.get("/types", async (req, res) => {
     res.json(await model.getTypes())
+})
+
+router.get("/types/:typesId", async (req, res) => {
+    var { typesID } = req.params
+    const type = await Type.findByPk(typesID)
+    res.json(type)
 })
 
 module.exports = router;

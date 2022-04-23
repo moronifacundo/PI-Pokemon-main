@@ -42,13 +42,18 @@ const Pokemons = (props) => {
     return (
         <div>
             {(!loading) ? <div className='pages'>
-                <p>Page</p>
+                <p className='pageTitle'>Page</p>
                 {
                     pages.map((p) => {
+                        // var selected = false
                         var disabled = false
-                        if (p === page) { disabled = true }
+                        if (p === page) {
+                            // selected = "selectedPage";
+                            disabled = true
+                        }
                         return (<button
                             key={p}
+                            // className={selected}
                             disabled={disabled}
                             onClick={() => setPage(p)}
                         >{p}</button>)

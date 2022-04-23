@@ -58,7 +58,7 @@ const NameFilter = () => {
                         value={input["name"]}
                         onChange={handleInputChange} />
                 </div>
-                <input type="submit" name="enviar" id="" />
+                {/* <input type="submit" name="enviar" id="" /> */}
             </form>
 
         </div>
